@@ -2,86 +2,99 @@ package almacenes_exfeb23;
 
 import java.util.Scanner;
 
-public class principal {
+import java.util.Scanner;
 
-	public static void main(String[] args) {
+public class Main {
 
-		Scanner leer = new Scanner(System.in);
+    public static void main(String[] args) {
 
-		proveedores[] arr = new proveedores[2];
-		articulos[] arr2 = new articulos[2];
-		proveedores p1 = new proveedores("0001l", "Jose", "Siempre vivo 33", "12/01/2022", "232313", "j@hotmail.com");
+        // Creating a scanner to read user input
+        Scanner input = new Scanner(System.in);
 
-		articulos a1 = new articulos("1230ee", "Pomada", "articulo liquido", 100, 10, 1, p1);
+        // Arrays to store providers and articles
+        Provider[] providersArray = new Provider[2];
+        Article[] articlesArray = new Article[2];
 
-		proveedores p2 = new proveedores("00012", "Miguel", "Calle Alegria 33", "12/01/2022", "232313",
-				"M@hotmail.com");
+        // Creating some initial providers and articles
+        Provider provider1 = new Provider("0001l", "Jose", "Siempre vivo 33", "12/01/2022", "232313", "j@hotmail.com");
+        Article article1 = new Article("1230ee", "Pomada", "Liquid article", 100, 10, 1, provider1);
 
-		articulos a2 = new articulos(null, null, null, 0, 0, 0);
-		arr[0] = p1;
-		arr[1] = p2;
-		arr2[0] = a1;
-		arr2[1] = a2;
+        Provider provider2 = new Provider("00012", "Miguel", "Calle Alegria 33", "12/01/2022", "232313", "M@hotmail.com");
+        Article article2 = new Article(null, null, null, 0, 0, 0, null);
 
-		System.out.println("1.Alta Articulo \n" + "2.Baja Articulo \n" + "3.Alta Proveedor \n" + "4.Baja Proveedor \n"
-				+ "5.Listar Articulos \n" + "6.Lista Proveedores \n" + "7.Venta Articulo \n"
-				+ "8.Existencias disponibles \n" + "9. Salir \n");
+        // Storing the providers and articles into arrays
+        providersArray[0] = provider1;
+        providersArray[1] = provider2;
+        articlesArray[0] = article1;
+        articlesArray[1] = article2;
 
-		int op;
-		do {
+        // Displaying the menu options
+        System.out.println("1. Add Article \n" + 
+                           "2. Remove Article \n" + 
+                           "3. Add Provider \n" + 
+                           "4. Remove Provider \n" + 
+                           "5. List Articles \n" + 
+                           "6. List Providers \n" + 
+                           "7. Sell Article \n" + 
+                           "8. Available Stock \n" + 
+                           "9. Exit \n");
 
-			System.out.println("Seleccionar opcion");
-			op = Integer.parseInt(leer.next());
-			switch (op) {
-			case 1:
-				System.out.println("Alta producto a1 al proveedor p1");
-				p1.alta(a1);
-				break;
-			case 2:
-				System.out.println("Dame codigo de producto");
-				String codigo = leer.next();
-				p1.baja(codigo);
-				break;
-			case 3:
-				System.out.println("Alta del proveedor p1");
-				a1.altaProveedor(p1);
-				
-				break;
-			case 4:
-				System.out.println("Dame codigo de Proveedor");
-				String codigoPro = leer.next();
-				a1.bajaProveedor(codigoPro);
-				break;
-			case 5:
-				for (int i = 0; i < 2; i++) {
+        int option;
+        do {
+            // Asking for an option from the user
+            System.out.println("Select an option");
+            option = Integer.parseInt(input.next());
 
-					System.out.println(arr2[i]);
+            switch (option) {
+                case 1:
+                    System.out.println("Adding article1 to provider1");
+                    provider1.addArticle(article1);
+                    break;
+                case 2:
+                    System.out.println("Enter the article code to remove:");
+                    String articleCode = input.next();
+                    provider1.removeArticle(articleCode);
+                    break;
+                case 3:
+                    System.out.println("Adding provider1");
+                    article1.addProvider(provider1);
+                    break;
+                case 4:
+                    System.out.println("Enter the provider code to remove:");
+                    String providerCode = input.next();
+                    article1.removeProvider(providerCode);
+                    break;
+                case 5:
+                    // Listing all articles
+                    for (int i = 0; i < 2; i++) {
+                        System.out.println(articlesArray[i]);
+                    }
+                    break;
+                case 6:
+                    // Listing all providers
+                    for (int i = 0; i < 2; i++) {
+                        System.out.println(providersArray[i]);
+                    }
+                    break;
+                case 7:
+                    System.out.println("Selling article");
+                    // Add selling functionality if needed
+                    break;
+                case 8:
+                    // Displaying available stock for article1
+                    System.out.println(article1.getStock());
+                    break;
+                case 9:
+                    // Exit the program
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (option != 9);
 
-				}
-				break;
-			case 6:
-				for (int i = 0; i < 2; i++) {
-
-					System.out.println(arr[i]);
-
-				}
-				break;
-
-			case 7:
-				System.out.println();
-			case 8:
-
-				System.out.println(a1.getUnidad());
-				break;
-			case 9:
-
-			}
-		} while (op != 9);
-		
-		
-	System.out.println(a1.existeProveedor(op, a2));
-	
-	
-	}
-
+        // Checking if the provider exists for article2
+        System.out.println(article1.isProviderAvailable(option, article2));
+    }
 }
+
