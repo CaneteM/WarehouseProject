@@ -2,7 +2,6 @@ package almacenes_exfeb23;
 
 import java.util.Scanner;
 
-import java.util.Scanner;
 
 public class Main {
 
